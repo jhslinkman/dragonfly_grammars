@@ -6,8 +6,20 @@ import shutil
 MACRO_DIR = os.path.join('.','grammars')
 NATLINK_MACROSYSTEM_DIR = os.path.join('C:\\','NatLink','NatLink','MacroSystem')
 
+file_whitelist = set([
+    '_emacs.py',
+    '_globals.py',
+    '_multiedit.txt',
+    '_multiedit_emacs.py',
+    '_multiedit_emacs.txt',
+    'grammar_loaders.py',
+    '_programming_mode.py',
+    'query_replace_mode.py',
+    '_test.py'
+    ])
+
 def copy_grammars():
-    src_files = os.listdir(MACRO_DIR)
+    src_files = set(os.listdir(MACRO_DIR)) & file_whitelist
     for file_name in src_files:
         full_file_name = os.path.join(MACRO_DIR, file_name)
         if os.path.isfile(full_file_name):

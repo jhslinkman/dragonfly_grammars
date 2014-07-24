@@ -17,7 +17,7 @@ from dragonfly import *
 #  times or when that key is not held down at all.
 
 release = Key("shift:up, ctrl:up")
-
+arguments = Key('alt:down') + Text('%(n)d') + Key('alt:up')
 
 #---------------------------------------------------------------------------
 # Here we define the single-action commands.  These can be spoken
@@ -34,32 +34,70 @@ cmd.map = {
            "page down [<n>]":                  Key("pgdown:%(n)d"),
            "up <n> (page | pages)":            Key("pgup:%(n)d"),
            "down <n> (page | pages)":          Key("pgdown:%(n)d"),
-           "left <n> (word | words)":          Key("c-left:%(n)d"),
-           "right <n> (word | words)":         Key("c-right:%(n)d"),
+#           "left <n> (word | words)":          Key("c-left:%(n)d"),
+#           "right <n> (word | words)":         Key("c-right:%(n)d"),
            "home":                             Key("home"),
            "end":                              Key("end"),
            "doc home":                         Key("c-home"),
            "doc end":                          Key("c-end"),
+           "(cent | center) line": Key("c-l"),
 
            "space [<n>]":                      release + Key("space:%(n)d"),
            "enter [<n>]":                      release + Key("enter:%(n)d"),
            "tab [<n>]":                        Key("tab:%(n)d"),
            "delete [<n>]":                     release + Key("del:%(n)d"),
-           "delete [<n> | this] (line|lines)": release + Key("home, s-down:%(n)d, del"),
+           #"delete [<n> | this] (line|lines)": release + Key("home, s-down:%(n)d, del"),
            "backspace [<n>]":                  release + Key("backspace:%(n)d"),
            "pop up":                           release + Key("apps"),
 
-           "paste":                            release + Key("c-v"),
-           "duplicate <n>":                    release + Key("c-c, c-v:%(n)d"),
-           "copy":                             release + Key("c-c"),
-           "cut":                              release + Key("c-x"),
+           "mark":                            release + Key("c-space"),
+           "undo":                            release + Key("c-x, u"),
+           "redo":                            release + Key("c-g, c-x, u"),
+           "paste [that]": release + Key("c-y"),
+           "paste over": Key("backspace, c-y"),
+           "paste below": release + Key("end, enter, c-y"),
+           "duplicate <n>": release + Key("a-w, c-y:%(n)d"),
+           "duplicate line [<n>] [times]":
+                    release + Key("c-a, c-space, c-n, a-w, c-y:%(n)d"),
+           "copy":                             release + Key("a-w"),
+           "yank":                             release + Key("a-w"),
+           'yank line': release + Key('c-a, c-space, c-e, a-w'),
+           "cut":                              release + Key("c-w"),
+           "kill":                             release + Key("c-w"),
+           'kill line': release + Key('c-a, c-space, c-e, c-w'),
            "select all":                       release + Key("c-a"),
            "[hold] shift":                     Key("shift:down"),
            "release shift":                    Key("shift:up"),
            "[hold] control":                   Key("ctrl:down"),
            "release control":                  Key("ctrl:up"),
            "release [all]":                    release,
+           "scratch lines":		       Key("c-x, c-o"),
+           "scratch space":		       Key("a-space"),
 
+           "( (back | left) <n> (word | words) | bow [<n>] )":
+                    Key("a-b:%(n)d"),
+           "( (forward |fore | right) <n> (word | words) | fow [<n>] )":
+                    Key("a-f:%(n)d"),
+	   "(kill | del | delete) [next] [<n> | this] (word | words)":
+	   	    release + arguments + Key("a-d"),
+           "(kill | del | delete) (prev |previous |back) [<n>] (word | words)":
+	   	    release + arguments + Key("a-backspace"),
+
+	   "(kill | del | delete) [this] line":
+	   	    release + Key("c-k"),
+           "(kill | del | delete) [next] [<n>] lines":
+	   	    release + arguments + Key("c-k"),
+           "(kill | del | delete) (prev |previous) [<n>] (line | lines)":
+	   	    release + Key("a-minus") + arguments + Key("c-k"),
+
+           "(up | back) (par | paragraph)":
+                    Key("a-lbrace"),
+           "(down | next) (par | paragraph)":
+                    Key("a-rbrace"),
+           "mark (par | paragraph)":
+                    Key("a-h"),
+
+           "cancel":                             release + Key("c-g"),
            "say <text>":                       release + Text("%(text)s"),
            "mimic <text>":                     release + Mimic(extra="text"),
 					 

@@ -1,28 +1,41 @@
 from dragonfly import (Grammar, AppContext, MappingRule, Key, Text,
-                       Dictation, Integer)
+                       Dictation, Integer, Function)
+from grammar_loaders import load_grammar
+from query_replace_mode import grammar as query_replace_grammar
 emacs = AppContext( title = 'emacs')
 grammar = Grammar('emacs', context = (emacs))
+
+load_query_replace = Function(load_grammar(query_replace_grammar))
 
 rules = MappingRule(
     name = 'emacs',
     mapping = {
-        'escape <text>'                      : Text('%(text)s'),
-
-        # Movement
-        'cent line': Key('c-l'),
-        'bow [<n>]'                      : Key('c-left:%(n)d'),
-        'fow [<n>]'                      : Key('c-right:%(n)d'),
-        'sel bow [<n>]': Key('c-space, c-right:%(n)d, a-w'),
-        'sel fow [<n>]': Key('c-space, c-right:%(n)d, a-w'),
+        '(escape | scape) <text>' : Text('%(text)s'),
 
         # Editing
-        'undo'                      : Key('c-x, u'),
         'quote':  Text("''") + Key('left'),
         'double quote':  Text('""') + Key('left'),
 
-        'yank line'                      : Key('c-a, c-space, c-e, a-w'),
-        'paste [that]'                      : Key('c-y'),
-#        'paste'                      : Key('c-y'),
+        # Search and replace
+        '( (fore | forward) search | (S | search) next ) [<n>]':
+            Key('c-s:%(n)d'),
+        '( (back | backward) search | (S | search) back ) [<n>]':
+            Key('c-r:%(n)d'),
+        'replace all':
+            Key('a-x') + Text('replace-string') + Key('enter'),
+        '(Q | query) (rep | replace)':
+            Key('alt:down') + Key('percent') + Key('alt:up') +\
+            load_query_replace,
+#            Key('a-percent'),
+        '(regex | regexp) [(Q | query)] (rep | replace)':
+            Key('ctrl:down, alt:down') + Key('percent') + Key('alt:up, ctrl:up') +\
+            load_query_replace,
+#            Key('c-a-percent'),
+
+        # Minibuffer
+        'repeat command': Key('c-x, escape, escape'),
+        'command history':
+            Key('a-x') + Text('list-command-history') + Key('enter'),
 
         # Working with files and buffers
         'visit file': Key('c-x, c-f'),
