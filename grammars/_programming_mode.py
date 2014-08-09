@@ -1,10 +1,10 @@
 from dragonfly import (Grammar, AppContext, MappingRule, Key, Text,
                        Dictation, Integer, Function, CompoundRule,
-                       RuleRef)
+                       RuleRef, Alternative, Choice)
 grammar = Grammar('programming mode')
 
-rules = MappingRule(
-    name = 'Programming rules',
+key_rules = MappingRule(
+    name = 'key rules',
     mapping = {
         '(ampersand | amp)':
             Key('ampersand'),
@@ -38,11 +38,12 @@ rules = MappingRule(
             Key('at'),
         '(asterisk | star)':
             Key('asterisk'),
-        'slash':
+       'slash':
             Key('slash'),
         'backslash':
             Key('backslash'),
-        '(equals | eek)':
+        # '(equals | eek)':
+        'eek':
             Key('equal'),
         '( bar | pipe )':
             Key('bar'),
@@ -50,30 +51,43 @@ rules = MappingRule(
         }
     )
 
-class PaddingRule(CompoundRule):
-    spec = 'pad <rule>'
-    extras = [RuleRef(rules, name = 'rule')]
+class FormattingRule(CompoundRule):
+    spec = '[<padding>] [<double>] <rule>'
+    extras = [
+        RuleRef(key_rules, name = 'rule'),
+        Choice('padding', {
+            'pad': 1,
+            'pad (L | left)': 2,
+            'pad (R | right)': 3,
+            }),
+        Choice('double', {
+            '(dub | double)': True
+            })]
 
     def _process_recognition(self, node, extras):
         rule = extras['rule']
-        Key('space').execute()
+        double = extras.get('double', False)
+        padding = extras.get('padding', 0)
+        if padding == 1 or padding == 2:
+            Key('space').execute()
         rule.execute()
-        Key('space').execute()
+        if double:
+            rule.execute()
+        if padding == 1 or padding == 3:
+            Key('space').execute()
 
-class DoubleRule(CompoundRule):
-    spec = '(dub | double) <rule>'
-    extras = [RuleRef(rules, name = 'rule')]
-
-    def _process_recognition(self, node, extras):
-        rule = extras["rule"]
-        rule.execute()
-        rule.execute()
-
-
+rules = MappingRule(
+    name = "programming rules",
+    mapping = {
+        "dot <text>": Key("dot") + Text("%(text)s"),
+        },
+    extras = [
+        Dictation("text", format=False),
+        ]
+    )
 
 grammar.add_rule(rules)
-grammar.add_rule(DoubleRule())
-grammar.add_rule(PaddingRule())
+grammar.add_rule(FormattingRule())
 grammar.load()
 
 def unload():
