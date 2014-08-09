@@ -21,7 +21,7 @@ rules = MappingRule(
         "find": Key("c-f"),
         "find again [<n>]": Key("c-g:%(n)d"),
         "find (prev | previous) [<n>]": Key('ctrl:down,shift:down,g:%(n)d,shift:up,ctrl:up'),
-        "link": Key("squote"),
+        "link [<text>]": Key("squote") + Text("%(text)s"),
 
         "close tab": Key("c-w"),
         "move tab left [<n>]": Key('ctrl:down,shift:down,pgup:%(n)d,shift:up,ctrl:up'),
@@ -31,7 +31,7 @@ rules = MappingRule(
         "next tab [<n>]": Key("c-tab:%(n)d"),
         "(prev | previous) tab [<n>]": Key("c-pgup:%(n)d"),
         "undo close tab": Key('ctrl:down,shift:down,t,shift:up,ctrl:up'),
-        "tab <n>":  Key('c-%(n)d'),
+        # "tab <n>":  Key('c-%(n)d'),
 
         "show history": Key('ctrl:down,shift:down,h,shift:up,ctrl:up'),
         "show bookmarks": Key('ctrl:down,shift:down,b,shift:up,ctrl:up'),
@@ -60,16 +60,12 @@ rules = MappingRule(
 
     extras = [
         Dictation("text", format=False),
-        Dictation("mark", format=False),
         Integer("n", 1, 20000),
-        Integer("scroll_by", 1, 20000),
     ],
 
     defaults = {
         "text" : "", 
-        "mark": "a",
         "n" : 1,
-        "scroll_by" : 10
     }
 )
 

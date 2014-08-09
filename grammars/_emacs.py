@@ -82,7 +82,32 @@ rules = MappingRule(
         # yasnippet commands
         'snip': Key('a-x,y,a,s,hyphen,e,x,p,a,n,d,enter'),
         'insert snippet': Key('a-x,y,a,s,hyphen,i,n,s,e,r,t,hyphen,s,n,i,p,p,e,t,enter'),
-                
+
+        # Dired commands
+        'open dired': Key('c-x,d'),
+        'quit dired': Key('q'),
+        'dired update': Key('g'),
+        'dired flag': Key('d'),
+        'dired mark': Key('m'),
+        'dired toggle marks': Key('t'),
+        'dired (unmark | unflag)': Key('u'),
+        'dired (unmark | unflag) all': Key('s-u'),
+        'dired delete': Key('x'),
+        'dired flag auto save': Key('hash'),
+        'dired flag backup': Key('tilde'),
+        'dired clean directory': Key('dot'),
+        'dired flag garbage files': Key('percent,ampersand'),
+        'dired flag files regex': Key('percent,d'),
+        'dired visit': Key('f'),
+        'dired visit other': Key('o'),
+        'dired view [file]': Key('v'),
+        'dired visit parent': Key('caret'),
+        'dired copy': Key('s-c'),
+        'dired rename': Key('s-r'),
+        'dired make (dir | directory)': Key('plus'),
+        'dired shell': Key('exclamation'),
+        'dired async shell': Key('ampersand'),
+        
         # Some python specific commands, move these to another file
         'ipython shell': Key('a-x') + Text('ipython') + Key('enter'),
     },

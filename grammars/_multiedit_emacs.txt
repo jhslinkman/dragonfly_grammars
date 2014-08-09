@@ -43,8 +43,8 @@ cmd.map = {
     'hard home':        Key('home'),
     'end':        Key('end'),
 
-    'file top':    Key('a-langle'),
-    'file toe':    Key('a-rangle'),
+    '(file top | doc home)':    Key('a-langle'),
+    '(file toe | doc end)':    Key('a-rangle'),
 
     "(cent | center) line": Key("c-l"),
     
@@ -68,7 +68,7 @@ cmd.map = {
     "paste again": release + Key("a-y"),
     "duplicate <n>": release + Key("a-w, c-y:%(n)d"),
     "duplicate line [<n>] [times]":
-        release + Key("c-a, c-space, c-n, a-w, c-y:%(n)d"),
+        release + Key("c-a, c-space, c-n, a-w, c-y:%(n)d,backspace"),
     "(copy | yank)": release + Key("a-w"),
     'yank line': release + Key('c-a, c-space, c-e, a-w'),
     "(cut | kill)": release + Key("c-w"),
