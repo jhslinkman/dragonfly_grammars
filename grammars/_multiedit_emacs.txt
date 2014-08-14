@@ -40,8 +40,8 @@ cmd.map = {
 
     'home':
         Key('a-m'),
-    'hard home':        Key('home'),
-    'end':        Key('end'),
+    '(hard home | care)':        Key('home'),
+    '(end | doll)':        Key('end'),
 
     '(file top | doc home)':    Key('a-langle'),
     '(file toe | doc end)':    Key('a-rangle'),
@@ -68,9 +68,9 @@ cmd.map = {
     "paste again": release + Key("a-y"),
     "duplicate <n>": release + Key("a-w, c-y:%(n)d"),
     "duplicate line [<n>] [times]":
-        release + Key("c-a, c-space, c-n, a-w, c-y:%(n)d,backspace"),
+        release + Key("c-a, c-space, c-n, a-w, c-y:%(n)d,left"),
     "(copy | yank)": release + Key("a-w"),
-    'yank line': release + Key('c-a, c-space, c-e, a-w'),
+    # 'yank line': release + Key('c-a, c-space, c-e, a-w'),
     "(cut | kill)": release + Key("c-w"),
     "select all": release + Key("c-a"),
     "[hold] shift": Key("shift:down"),
@@ -79,7 +79,10 @@ cmd.map = {
     "release control": Key("ctrl:up"),
     "release [all]": release,
     "scratch lines": Key("c-x, c-o"),
-    "scratch space": Key("a-x") + Text("just-one-space") + Key("enter"),
+    "scratch space": Key("a-x") + Key("j,u,s,t,hyphen,o,n,e,hyphen,s,p,a,c,e") + Key("enter"),
+    "insert below": Key("end,c-j"),
+    "insert above": Key("up,end,c-j"),
+    "insert (par | paragraph)": Key("end,enter,c-x,c-o,enter:2,up"),
     
     "( (back | left) <n> (word | words) | bow [<n>] )":
         num_args + Key("a-b"),
@@ -89,7 +92,8 @@ cmd.map = {
         release + num_args + Key("a-d"),
     "((kill | del | delete) (prev |previous |back) [<n>] (word | words) | whack [<n>])":
 	    release + num_args + Key("a-backspace"),
-
+    "yank word": Key("a-x,t,h,i,n,g,hyphen,c,o,p,y,hyphen,w,o,r,d,enter"),
+        
     "(kill | del | delete) [this] line":
 	    release + Key("c-k"),
     "(kill | del | delete) whole line":
@@ -100,7 +104,8 @@ cmd.map = {
 	    release + Key("a-0,c-k"),
     "(kill | del | delete) (back | prev | previous) [<n>] (line | lines)":
 	    release + Key("a-minus") + num_args + Key("c-k"),
-
+    "yank line": Key("a-x,t,h,i,n,g,hyphen,c,o,p,y,hyphen,l,i,n,e,enter"),
+        
     "(up | back) [<n>] (par | paragraph | paragraphs)":
         num_args + Key("a-lbrace"),
     "(down | next) [<n>] (par | paragraph | paragraphs)":
@@ -112,7 +117,7 @@ cmd.map = {
     '(home | first) (car | character)':
         Key('a-m'),
     'indent':
-        Key('a-i'),
+        Key('a-x,i,n,d,e,n,t,hyphen,r,e,l,a,t,i,v,e,enter'),
     'indent region [<n>]':
         num_args + Key('ctrl:down,alt:down,backslash,alt:up,ctrl:up'),
     'shift region left [<n>]':
@@ -151,6 +156,9 @@ cmd.map = {
     'no cap region':
         Key('c-x,c-l'),
 
+    #### Spacing
+    'whack (leading | lead) [space]': Key('a-b,backspace,a-f'),
+
     #### Lines
     #    'line down [<n>]': num_args + Key(''),
     'lineup [<n>]':    num_args + Key('home:2, shift:down, end:2, shift:up, c-x, del, up, home:2, enter, up, c-v'),
@@ -183,7 +191,7 @@ def format_jive(dictation):          # Function name must start with "format_".
     return "-".join(text.split(" "))  # Put underscores between words.
 
 def format_dotty(dictation):          # Function name must start with "format_".
-    """ Dotty <dictation> """         # Docstring defining spoken-form.
+    """ dot word <dictation> """         # Docstring defining spoken-form.
     text = str(dictation).lower()             # Get written-form of dictated text.
     return ".".join(text.split(" "))  # Put underscores between words.
 

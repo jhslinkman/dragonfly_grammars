@@ -7,6 +7,8 @@ grammar = Grammar('emacs', context = (emacs))
 
 load_query_replace = Function(load_grammar(query_replace_grammar))
 
+num_args =  Key('alt:down') + Text('%(n)d') + Key('alt:up')
+
 rules = MappingRule(
     name = 'emacs',
     mapping = {
@@ -20,6 +22,7 @@ rules = MappingRule(
         'comment region': Key('c-c,c-c'),
 
         # Code evaluation
+        'eval (fun | function)':  Key('a-x'),
         'eval expression':  Key('a-colon'),
         'eval last [sexp]':  Key('c-x,c-e'),
         'eval defun':  Key('ctrl:down,alt:down,x,alt:up,ctrl:up'),
@@ -45,23 +48,26 @@ rules = MappingRule(
         # Minibuffer
         'repeat command': Key('c-x, escape, escape'),
         'command history':
-            Key('a-x') + Text('list-command-history') + Key('enter'),
+            Key('a-x,l,i,s,t,hyphen,c,o,m,m,a,n,d,hyphen,h,i,s,t,o,r,y,enter'),
 
         # Working with files and buffers
         'visit file': Key('c-x, c-f'),
         'file save':  Key('c-x, c-s'),
-        'file save as':  Key('c-x, c-w'),
-        
+        'file save as':  Key('c-x, c-w'),        
         'new window':  Key('c-x, 3'),
         'new window down':  Key('c-x, 2'),
         'previous window':  Key('c-minus, c-x, o'),
         'next window':  Key('c-x, o'),
         'kill window': Key('c-x, 0'),
         'kill other windows': Key('c-x, 1'),
+        'shrink window horizontally [<n>]': Key('c-minus') + num_args + Key('c-x,rbrace'),
+        'enlarge window horizontally [<n>]': num_args + Key('c-x,rbrace'),
+        'shrink window [<n>]': Key('c-minus') + num_args + Key('c-x,caret'),
+        'enlarge window [<n>]': num_args + Key('c-x,caret'),
 
         'next buffer': Key('c-x,right'),
         'previous buffer': Key('c-x,right'),
-        'buffer menu': Key('a-x') + Text('buffer-menu') + Key('enter'),
+        'buffer menu': Key('a-x,b,u,f,f,e,r,hyphen,m,e,n,u,enter'),
         'kill buffer': Key('c-x, k, enter'),
 
         # Working with Emacs itself
@@ -75,38 +81,38 @@ rules = MappingRule(
         'next command [<n>]': Key('c-down:%(n)d'),
 
         # Specific to simple-httpd.el
-        'start server': Key('a-x') + Text('httpd-start') + Key('enter'),
-        'stop server': Key('a-x') + Text('httpd-stop') + Key('enter'),
-        'set server root': Key('a-x') + Text('set-server-root') + Key('enter'),
+        'start server': Key('a-x,h,t,t,p,d,hyphen,s,t,a,r,t,enter'),
+        'stop server': Key('a-x,h,t,t,p,d,hyphen,s,t,o,p,enter'),
+        'set server root': Key('a-x,s,e,t,hyphen,s,e,r,v,e,r,hyphen,r,o,o,t,enter'),
 
         # yasnippet commands
         'snip': Key('a-x,y,a,s,hyphen,e,x,p,a,n,d,enter'),
         'insert snippet': Key('a-x,y,a,s,hyphen,i,n,s,e,r,t,hyphen,s,n,i,p,p,e,t,enter'),
 
         # Dired commands
-        'open dired': Key('c-x,d'),
-        'quit dired': Key('q'),
-        'dired update': Key('g'),
-        'dired flag': Key('d'),
-        'dired mark': Key('m'),
-        'dired toggle marks': Key('t'),
-        'dired (unmark | unflag)': Key('u'),
-        'dired (unmark | unflag) all': Key('s-u'),
-        'dired delete': Key('x'),
-        'dired flag auto save': Key('hash'),
-        'dired flag backup': Key('tilde'),
-        'dired clean directory': Key('dot'),
-        'dired flag garbage files': Key('percent,ampersand'),
-        'dired flag files regex': Key('percent,d'),
-        'dired visit': Key('f'),
-        'dired visit other': Key('o'),
-        'dired view [file]': Key('v'),
-        'dired visit parent': Key('caret'),
-        'dired copy': Key('s-c'),
-        'dired rename': Key('s-r'),
-        'dired make (dir | directory)': Key('plus'),
-        'dired shell': Key('exclamation'),
-        'dired async shell': Key('ampersand'),
+        'open ( dire | dired )': Key('c-x,d'),
+        'quit ( dire | dired )': Key('q'),
+        '( dire | dired ) update': Key('g'),
+        '( dire | dired ) flag': Key('d'),
+        '( dire | dired ) mark': Key('m'),
+        '( dire | dired ) toggle marks': Key('t'),
+        '( dire | dired ) (unmark | unflag)': Key('u'),
+        '( dire | dired ) (unmark | unflag) all': Key('s-u'),
+        '( dire | dired ) delete': Key('x'),
+        '( dire | dired ) flag auto save': Key('hash'),
+        '( dire | dired ) flag backup': Key('tilde'),
+        '( dire | dired ) clean directory': Key('dot'),
+        '( dire | dired ) flag garbage files': Key('percent,ampersand'),
+        '( dire | dired ) flag files regex': Key('percent,d'),
+        # '( dire | dired ) visit': Key('f'),
+        '( dire | dired ) visit other': Key('o'),
+        '( dire | dired ) view [file]': Key('v'),
+        '( dire | dired ) visit parent': Key('caret'),
+        '( dire | dired ) copy': Key('s-c'),
+        '( dire | dired ) rename': Key('s-r'),
+        '( dire | dired ) make (dir | directory)': Key('plus'),
+        '( dire | dired ) shell': Key('exclamation'),
+        '( dire | dired ) async shell': Key('ampersand'),
         
         # Some python specific commands, move these to another file
         'ipython shell': Key('a-x') + Text('ipython') + Key('enter'),

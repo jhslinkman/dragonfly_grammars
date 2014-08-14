@@ -13,13 +13,20 @@ file_whitelist = [
     '_multiedit_emacs.py',
     '_multiedit_emacs.txt',
     'grammar_loaders.py',
-    '_programming_mode.py',
-    '_javascript_mode.py',
     'query_replace_mode.py',
     '_firefox.py',
-    # '_dynamic_manager.py',
-    # 'dynamics/__init__.py',
-    # 'dynamics/javascript_grammar.py',
+    '_smartgit.py',
+    '_dynamic_manager.py',
+    
+    'dynamics/__init__.py',
+    'dynamics/javascript.py',
+    'dynamics/d3.py',
+    'dynamics/programming.py',
+    # 'dynamics/python.py',
+    
+    'lib/__init__.py',
+    'lib/config.py',
+    'lib/sound.py',
     ]
 
 class GrammarFile(object):

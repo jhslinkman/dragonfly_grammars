@@ -1,6 +1,11 @@
 from dragonfly import (Grammar, AppContext, MappingRule, Key, Text,
                        Dictation, Integer, Function, CompoundRule,
                        RuleRef, Alternative, Choice)
+
+DYN_MODULE_TYPE = "programming_language"
+DYN_MODULE_NAME = "programming"
+INCOMPATIBLE_MODULES = []
+
 grammar = Grammar('programming mode')
 
 key_rules = MappingRule(
@@ -47,7 +52,8 @@ key_rules = MappingRule(
             Key('equal'),
         '( bar | pipe )':
             Key('bar'),
-        
+        'caret':
+            Key('caret'),
         }
     )
 
@@ -80,15 +86,52 @@ rules = MappingRule(
     name = "programming rules",
     mapping = {
         "dot <text>": Key("dot") + Text("%(text)s"),
+        "(pail | (L | left) paren)": Key("lparen"),
+        "(pair | (R | right) paren)": Key("rparen"),
+        "(bale | (L | left) bracket)": Key("lbracket"),
+        "(bare | (R | right) bracket)": Key("rbracket"),
+        "(braille | (L | left) brace)": Key("lbrace"),
+        "(briar | (R | right) brace)": Key("rbrace"),
+        "(lang | (L | left) angle)": Key("langle"),
+        "(rang | (R | right) angle)": Key("rangle"),
         },
     extras = [
         Dictation("text", format=False),
         ]
     )
 
+
+
 grammar.add_rule(rules)
 grammar.add_rule(FormattingRule())
 grammar.load()
+grammar.disable()
+
+
+def dynamic_enable():
+    global grammar
+    if grammar.enabled:
+        return False
+    else:
+        grammar.enable()
+        return True
+
+
+def dynamic_disable():
+    global grammar
+    if grammar.enabled:
+        grammar.disable()
+        return True
+    else:
+        return False
+
+
+def is_enabled():
+    global grammar
+    if grammar.enabled:
+        return True
+    else:
+        return False
 
 def unload():
   global grammar
