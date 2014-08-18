@@ -19,8 +19,9 @@ file_whitelist = [
     '_dynamic_manager.py',
     
     'dynamics/__init__.py',
-    'dynamics/javascript.py',
+    'dynamics/bash.py',
     'dynamics/d3.py',
+    'dynamics/javascript.py',
     'dynamics/programming.py',
     # 'dynamics/python.py',
     
