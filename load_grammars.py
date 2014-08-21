@@ -13,7 +13,7 @@ file_whitelist = [
     '_multiedit_emacs.py',
     '_multiedit_emacs.txt',
     'grammar_loaders.py',
-    'query_replace_mode.py',
+    # 'query_replace_mode.py',
     '_firefox.py',
     '_smartgit.py',
     '_dynamic_manager.py',
@@ -23,6 +23,8 @@ file_whitelist = [
     'dynamics/d3.py',
     'dynamics/javascript.py',
     'dynamics/programming.py',
+    'dynamics/tex.py',
+    'dynamics/query_replace.py',
     # 'dynamics/python.py',
     
     'lib/__init__.py',

@@ -86,6 +86,13 @@ rules = MappingRule(
     name = "programming rules",
     mapping = {
         "dot <text>": Key("dot") + Text("%(text)s"),
+        "dash <text>": Key("hyphen") + Text("%(text)s"),
+        "quote": Key("dquote"),
+        
+        "dot (jason | jace on | J S O N)": Key("dot,j,s,o,n"),
+        "dot J S": Key("dot,j,s"),
+        "dot T X T": Key("dot,t,x,t"),
+        
         "(pail | (L | left) paren)": Key("lparen"),
         "(pair | (R | right) paren)": Key("rparen"),
         "(bale | (L | left) bracket)": Key("lbracket"),

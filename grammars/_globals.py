@@ -5,19 +5,20 @@ from dragonfly import (Grammar,
                        Text,
                        Dictation,
                        Integer,
-                       Key)
-
+                       Key,
+                       Function)
+    
 rules = MappingRule(
 	name = "general",
 	mapping = {
         '(escape | scape) <text>' : Text('%(text)s'),
 		"slap": Key("enter"),
-		"max (when | win | window)": Key("w-up"),
-		"left (when | win | window) [<n>]": Key("w-left:%(n)d"),
-		"right (when | win | window) [<n>]": Key("w-right:%(n)d"),
-		"min (when | win | window)": Key("w-down"),
+		"max (win | window)": Key("w-up"),
+		"left (win | window) [<n>]": Key("w-left:%(n)d"),
+		"right (win | window) [<n>]": Key("w-right:%(n)d"),
+        "min (win | window)": Key("w-down"),
         "switch apps": Key("alt:down, tab"),
-		"switch app": Key("a-tab"),
+		"switch (window | win)": Mimic("press", "alt", "tab"), #  Key("alt:down/10,tab,alt:up"),
         "code mode": Mimic("\\no-caps-on") + Mimic("\\no-space-on"),
 	},
     

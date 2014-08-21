@@ -1,11 +1,17 @@
-from dragonfly import (Grammar, AppContext, MappingRule, Key, Text,
-                       Dictation, Integer, Function)
-from grammar_loaders import load_grammar
-from query_replace_mode import grammar as query_replace_grammar
+from dragonfly import (Grammar,
+                       AppContext,
+                       MappingRule,
+                       Key,
+                       Text,
+                       Dictation,
+                       Integer,
+                       Function,
+                       Mimic)
+
 emacs = AppContext( title = 'emacs')
 grammar = Grammar('emacs', context = (emacs))
 
-load_query_replace = Function(load_grammar(query_replace_grammar))
+load_query_replace = Mimic('enable Q rep mode')
 
 num_args =  Key('alt:down') + Text('%(n)d') + Key('alt:up')
 

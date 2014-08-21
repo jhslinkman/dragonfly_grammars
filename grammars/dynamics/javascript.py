@@ -23,7 +23,7 @@ rules = MappingRule(
         # "catch": Text("catch () {") + Key("left:3"),
         # "comment": Text("// "),
         # "comment <text>": SCText("// %(text)s"),
-        "continue": Text("continue"),
+        # "continue": Text("continue"),
         "close comment": Text(" */"),
         "debugger": Text("debugger"),
         "default": Text("default"),
@@ -52,7 +52,7 @@ rules = MappingRule(
         "((jquery|jay query) (variable|var)|dollar paren)": Text("$()") + Key("left"),  # @IgnorePep8
         "less than": Text(" < "),
         "less equals": Text(" <= "),
-        "(line end|end line)": Key("end,semicolon,enter"),
+        "(line end|end line)": Key("end,semicolon"),
         #"(minus|subtract|subtraction)": Text(" - "),
         "(minus|subtract|subtraction) equals": Text(" -= "),
         "modulo": Key("space") + Key("percent") + Key("space"),
@@ -85,7 +85,7 @@ rules = MappingRule(
         # Global variables and objects.
         "window": Text("window"),
         "undefined": Text("undefined"),
-        "JSON": Text("JSON"),
+        "(jason | jace on| J S O N)": Text("s-j,s-s,s-o,s-n"),
 
     },    
     extras = [

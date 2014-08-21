@@ -30,6 +30,11 @@ rules = MappingRule(
         "D three": Key("d,3"),
         "S V G": Key("s,v,g"),
 
+        # geography specific
+        "topo jace on": Key("t,o,p,o,j,s,o,n"),
+        "dot feature": Key("dot,f,e,a,t,u,r,e,lparen"),
+        "dot mesh": Key("dot,m,e,s,h,lparen"),
+                
         # Selections
         "dot select": Key("dot,s,e,l,e,c,t,lparen"),
             # d3.select - select an element from the current document.
@@ -198,8 +203,9 @@ rules = MappingRule(
         # "dot size": Key("dot,s,i,z,e,lparen"),
             # set.size - returns the number of values in the set.
 
-                        
         # Shapes
+        "circle": Key("c,i,r,c,l,e"),
+        "line": Key("l,i,n,e"),
         "rectangle": Key("r,e,c,t"),
 
         # Scales
