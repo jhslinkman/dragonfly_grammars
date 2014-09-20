@@ -22,13 +22,17 @@ grammar = Grammar('')
 rules = MappingRule(
     name = '',
     mapping = {
+
+        'P D F latex': Key('p,d,f,l,a,t,e,x'),
+        
+        # AUCTeX specific
         'insert section': Key('c-c,c-s'),
         'macro': Key('c-c,enter'),
         'end macro': Key('ctrl:down,a-i,ctrl:up'),
-        'insert (environment | environ)': Key('c-c,c-e'),
-        'change (environment | environ)': Key('c-u,c-c,c-e'),
-        'end (environment | environ)': Key('c-c,rparen'),
-        'insert item': Key('c-c,c-j'),
+        'insert (environment | environ | env)': Key('c-c,c-e'),
+        'change (environment | environ | env)': Key('c-u,c-c,c-e'),
+        'end (environment | environ | env)': Key('c-c,rparen'),
+        '(insert | new) item': Key('c-c,c-j'),
 
         'emphasize': Key('c-c,c-f,c-e'),
         'bold': Key('c-c,c-f,c-b'),
@@ -51,21 +55,21 @@ rules = MappingRule(
         'delete font': Key('c-c, c-f,c-d'),
 
         'comment (paragraph | par)': Key('c-c,percent'),
-        'format (environment | environ)': Key('c-c,c-q,c-e'),
+        'format (environment | environ | env)': Key('c-c,c-q,c-e'),
         'format (paragraph | par)': Key('c-c,c-q,c-p'),
         'format region': Key('c-c,c-q,c-r'),
         'format section': Key('c-c,c-q,c-s'),
-        'mark (environment | environ)': Key('c-c,dot'),
+        'mark (environment | environ | env)': Key('c-c,dot'),
         'mark section': Key('c-c,asterisk'),
-        'go to (environment | environ) start': Key('ctrl:down,a-a,ctrl:up'),
-        'go to (environment | environ) end': Key('ctrl:down,a-e,ctrl:up'),
+        'up (environment | environ | env)': Key('ctrl:down,a-a,ctrl:up'),
+        'down (environment | environ | env)': Key('ctrl:down,a-e,ctrl:up'),
 
         'fold mode': Key('c-c,c-o,c-f'),
         'hide buffer': Key('c-c,c-o,c-b'),
         'hide region': Key('c-c,c-o,c-r'),
         'hide (paragraph | par)': Key('c-c,c-o,c-p'),
         'hide macro': Key('c-c,c-o,enter'),
-        'hide (environment | environ)': Key('c-c,c-o,c-e'),
+        'hide (environment | environ | env)': Key('c-c,c-o,c-e'),
         'hide comment': Key('c-c,c-o,c-c'),
         'show buffer': Key('c-c,c-o,b'),
         'show region': Key('c-c,c-o,r'),

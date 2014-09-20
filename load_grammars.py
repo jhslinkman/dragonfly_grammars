@@ -23,6 +23,8 @@ file_whitelist = [
     'dynamics/d3.py',
     'dynamics/javascript.py',
     'dynamics/programming.py',
+    'dynamics/skewer.py',
+    'dynamics/sql.py',
     'dynamics/tex.py',
     'dynamics/query_replace.py',
     # 'dynamics/python.py',

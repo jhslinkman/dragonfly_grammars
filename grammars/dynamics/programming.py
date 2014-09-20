@@ -88,9 +88,13 @@ rules = MappingRule(
         "dot <text>": Key("dot") + Text("%(text)s"),
         "dash <text>": Key("hyphen") + Text("%(text)s"),
         "quote": Key("dquote"),
-        
+
+        "dot C S V": Key("dot,c,s,v"),
         "dot (jason | jace on | J S O N)": Key("dot,j,s,o,n"),
         "dot J S": Key("dot,j,s"),
+        "dot (M D | markdown)": Key("dot,m,d"),
+        "dot S Q L": Key("dot,s,q,l"),
+        "dot (tex | tech)": Key("dot,t,e,x"),
         "dot T X T": Key("dot,t,x,t"),
         
         "(pail | (L | left) paren)": Key("lparen"),

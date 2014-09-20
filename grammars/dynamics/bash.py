@@ -23,12 +23,15 @@ rules = MappingRule(
     name = '',
     mapping = {
         "(change (directory|dir)|C D)": Key("c,d,space"),
-        "list files": Key("l,s,hyphen,l,a,enter"),
+        "list files": Key("l,s,space,hyphen,l,a,enter"),
         "make (directory|dir)": Key("m,k,d,i,r,space"),
         "move": Key("m,v,space"),
         "(R M|remove file)": Key("r,m,space"),
+        "(R M D|remove directory)": Key("r,m,space,hyphen,r"),
         "W get ": Key("w,g,e,t,space"),
 
+        # remote server commands
+        "S S H": Key("f,a,k,e,c,y,g,p,t,y,space,s,s,h"),
     },    
     extras = [
         Dictation("text", format=False),

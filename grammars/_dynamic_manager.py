@@ -34,21 +34,21 @@ import dynamics
 moduleMapping = {}
 
 
-def notify_module_enabled(moduleName, useSound=True):
+def notify_module_enabled(moduleName, useSound=False):
     """Notifies the user that a dynamic module has been enabled."""
     print("==> Dynamic grammar enabled: %s" % moduleName)
     if useSound:
         sound.play(sound.SND_ACTIVATE)
 
 
-def notify_module_disabled(moduleName, useSound=True):
+def notify_module_disabled(moduleName, useSound=False):
     """Notifies the user that a dynamic module has been disabled."""
     print("<-- Dynamic grammar disabled: %s" % moduleName)
     if useSound:
         sound.play(sound.SND_DEACTIVATE)
 
 
-def notify_module_action_aborted(message, useSound=True):
+def notify_module_action_aborted(message, useSound=False):
     """Notifies the user, with a custom message, that the action was not
     completed.
 
@@ -58,7 +58,7 @@ def notify_module_action_aborted(message, useSound=True):
         sound.play(sound.SND_MESSAGE)
 
 
-def notify(message="", useSound=True):
+def notify(message="", useSound=False):
     """Notifies the user, with a custom message, that the action was not
     completed.
 
@@ -69,7 +69,7 @@ def notify(message="", useSound=True):
         sound.play(sound.SND_DING)
 
 
-def enable_module(module, useSound=True):
+def enable_module(module, useSound=False):
     """Enables the specified module. Disables conflicting modules."""
     if not module:
         return
@@ -86,7 +86,7 @@ def enable_module(module, useSound=True):
             moduleName)
 
 
-def disable_module(module, useSound=True):
+def disable_module(module, useSound=False):
     """Disabled the specified module."""
     if not module:
         return
@@ -105,7 +105,7 @@ def disable_incompatible_modules(enableModule):
     for moduleName in enableModule.INCOMPATIBLE_MODULES:
         module = moduleMapping.get(moduleName)
         if module:
-            disable_module(module, useSound=True)
+            disable_module(module, useSound=False)
 
 
 def import_dynamic_modules():
@@ -128,7 +128,7 @@ def import_dynamic_modules():
 import_dynamic_modules()
 
 
-def disable_all_modules(useSound=True):
+def disable_all_modules(useSound=False):
     """Iterates through the list of all dynamic modules and disables them."""
     global moduleMapping
     disableCount = 0
@@ -240,7 +240,7 @@ grammar.add_rule(series_rule)
 grammar.load()
 
 
-notify()  # Notify that Dragonfly is ready with a sound.
+notify(useSound = False)  # Notify that Dragonfly is ready with a sound.
 
 
 def unload():

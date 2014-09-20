@@ -11,7 +11,7 @@ from dragonfly import (Grammar,
 emacs = AppContext( title = 'emacs')
 grammar = Grammar('emacs', context = (emacs))
 
-load_query_replace = Mimic('enable Q rep mode')
+load_query_replace = Mimic('enable', 'Q', 'rep', 'mode')
 
 num_args =  Key('alt:down') + Text('%(n)d') + Key('alt:up')
 
@@ -82,7 +82,8 @@ rules = MappingRule(
         'kill Emacs kill': Key('c-x, c-c'),
         
         # Shell specific commands
-        'open shell': Key('a-x') + Text('shell') + Key('enter'),
+        'open shell': Key('a-x,s,h,e,l,l,enter'),
+        'open cygwin shell': Key('a-x,c,y,g,w,i,n,hyphen,s,h,e,l,l,enter'),
         'last command [<n>]': Key('c-up:%(n)d'),
         'next command [<n>]': Key('c-down:%(n)d'),
 

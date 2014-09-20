@@ -113,6 +113,14 @@ cmd.map = {
     "mark [<n>] (par | paragraph | paragraphs)":
         num_args + Key("a-h"),
 
+    "(for list | lore) [<n>]": num_args + Key("ctrl:down,a-n,ctrl:up"),
+    "(back list | lack) [<n>]": num_args + Key("ctrl:down,a-p,ctrl:up"),
+    "fore ex [<n>]": num_args + Key("ctrl:down,a-f,ctrl:up"),
+    "back ex [<n>]": num_args + Key("ctrl:down,a-b,ctrl:up"),
+    "kill ex [<n>]": num_args + Key("ctrl:down,a-k,ctrl:up"),
+    "kill back ex [<n>]": Key("a-minus") + num_args + Key("ctrl:down,a-k,ctrl:up"),
+    "mark ex": Key("ctrl:down,a-space,ctrl:up"),
+                
     #### Indentation
     '(home | first) (car | character)':
         Key('a-m'),
@@ -137,18 +145,18 @@ cmd.map = {
     '(cap | capitalize) (back | prev | previous) <n> words':
         Key('a-minus') + num_args + Key('a-c'),
 
-    '(no (cap | capitalize) | lowercase) [next] word':
+    '(no (cap | capitalize) | lowercase | downcase) [next] word':
         Key('a-l'),
-    '(no (cap | capitalize) | lowercase) [next] <n> words':
+    '(no (cap | capitalize) | lowercase | downcase) [next] <n> words':
         num_args + Key('a-l'),
-    '(no (cap | capitalize) | lowercase) (back | prev | previous) <n> words':
+    '(no (cap | capitalize) | lowercase | downcase) (back | prev | previous) <n> words':
         Key('a-minus') + num_args + Key('a-l'),
 
-    'all (caps | capitalize) [next] word':
+    '(all (caps | capitalize) | upcase) [next] word':
         Key('a-u'),
-    'all (caps | capitalize) [next] <n> words':
+    '(all (caps | capitalize) | upcase) [next] <n> words':
         num_args + Key('a-u'),
-    'all (caps | capitalize) (back | prev | previous) <n> words':
+    '(all (caps | capitalize) | upcase) (back | prev | previous) <n> words':
         Key('a-minus') + num_args + Key('a-u'),
 
     'cap region':
@@ -158,17 +166,6 @@ cmd.map = {
 
     #### Spacing
     'whack (leading | lead) [space]': Key('a-b,backspace,a-f'),
-
-    #### Lines
-    #    'line down [<n>]': num_args + Key(''),
-    'lineup [<n>]':    num_args + Key('home:2, shift:down, end:2, shift:up, c-x, del, up, home:2, enter, up, c-v'),
-    'nab [<n>]':       num_args + Key('home:2, shift:down, down, up, end:2, shift:up, c-c, end:2'),
-    'plop [<n>]':      num_args + Key('c-v'),
-    'squishy [<n>]':   num_args + Key('end:2, del, space'),
-    'strip':           Key('s-end:2, del'),
-    'striss':          Key('s-home:2, del'),
-    'trance [<n>]':    num_args + Key('home:2, shift:down, down, up, end:2, shift:up, c-c, end:2, enter, c-v'),
-    'wipe [<n>]':      num_args + Key('home:2, shift:down, down, up, end:2, del, shift:up, backspace'),
 
 }
 

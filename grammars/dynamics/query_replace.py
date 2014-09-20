@@ -17,7 +17,7 @@ INCOMPATIBLE_MODULES = [
 
 grammar = Grammar('')
 
-unload_grammar_action = Mimic('disable Q rep mode')
+unload_grammar_action = Mimic('disable', 'Q', 'rep', 'mode')
 
 rules = MappingRule(
     name = 'query replace',
