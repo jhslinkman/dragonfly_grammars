@@ -143,6 +143,8 @@ def setup_config(config_file):
 
 config, namespace = setup_config('_multiedit.txt')
 emacs_config, emacs_namespace = setup_config('_multiedit_emacs.txt')
+sublime_config, sublime_namespace = setup_config('_multiedit_sublime.txt')
+terminal_config, terminal_namespace = setup_config('_mintty.txt')
 
 #---------------------------------------------------------------------------
 # Here we prepare the list of formatting functions from the config file.
@@ -185,6 +187,8 @@ def setup_format_rule(namespace):
 
 FormatRule = setup_format_rule(namespace)
 EmacsFormatRule = setup_format_rule(emacs_namespace)
+SublimeFormatRule = setup_format_rule(sublime_namespace)
+TerminalFormatRule = setup_format_rule(terminal_namespace)
 
 #---------------------------------------------------------------------------
 # Here we define the keystroke rule.
@@ -226,6 +230,8 @@ def setup_keystroke_rule(config):
 
 KeystrokeRule = setup_keystroke_rule(config)
 EmacsKeystrokeRule = setup_keystroke_rule(emacs_config)
+SublimeKeystrokeRule = setup_keystroke_rule(sublime_config)
+TerminalKeystrokeRule = setup_keystroke_rule(terminal_config)
 
 #---------------------------------------------------------------------------
 # Here we create an element which is the sequence of keystrokes.
@@ -288,13 +294,17 @@ def setup_repeat_rule(KeystrokeRule, FormatRule):
 
 RepeatRule = setup_repeat_rule(KeystrokeRule, FormatRule)
 EmacsRepeatRule = setup_repeat_rule(EmacsKeystrokeRule, EmacsFormatRule)
+SublimeRepeatRule = setup_repeat_rule(SublimeKeystrokeRule, SublimeFormatRule)
+TerminalRepeatRule = setup_repeat_rule(TerminalKeystrokeRule, TerminalFormatRule)
 
 #---------------------------------------------------------------------------
 # Create and load this module's grammar.
 #  This module contains Emacs specific multi-edit commands.
 
 emacs = AppContext( title = 'emacs')
-not_emacs = ~emacs
+sublime = AppContext( executable = 'sublime_text')
+terminal = AppContext( executable = 'mintty')
+not_emacs = ~emacs & ~sublime & ~terminal
 
 grammar = Grammar('multi edit', context = (not_emacs))   # Create this module's grammar.
 grammar.add_rule(RepeatRule())    # Add the top-level rule.
@@ -304,11 +314,27 @@ emacs_grammar = Grammar('emacs multi edit', context = (emacs))   # Create this m
 emacs_grammar.add_rule(EmacsRepeatRule())    # Add the top-level rule.
 emacs_grammar.load()                    # Load the grammar.
 
+sublime_grammar = Grammar('sublime multi edit', context = (sublime))   # Create this module's grammar.
+sublime_grammar.add_rule(SublimeRepeatRule())    # Add the top-level rule.
+sublime_grammar.load()                    # Load the grammar.
+
+terminal_grammar = Grammar('terminal multi edit', context = (terminal))   # Create this module's grammar.
+terminal_grammar.add_rule(TerminalRepeatRule())    # Add the top-level rule.
+terminal_grammar.load()                    # Load the grammar.
+
+
+
 # Unload function which will be called at unload time.
 def unload():
     global grammar
     global emacs_grammar
+    global sublime_grammar
+    global terminal_grammar
     if grammar: grammar.unload()
     if emacs_grammar: emacs_grammar.unload()
+    if sublime_grammar: sublime_grammar.unload()
+    if terminal_grammar: terminal_grammar.unload()
     grammar = None
     emacs_grammar = None
+    sublime_grammar = None
+    terminal_grammar = None

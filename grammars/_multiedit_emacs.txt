@@ -50,6 +50,7 @@ cmd.map = {
     
     #### Various keys
     '(space | ace) [<n>]': num_args + Key('space'),
+    'comma': Key('comma'),
     'act': Key('escape'),
     '(delete | del | chuck) [<n>]': num_args + Key('del'),
     '(backspace | scratch) [<n>]': Key('backspace:%(n)d'),

@@ -24,7 +24,7 @@ num_args =  Key('alt:down') + Text('%(n)d') + Key('alt:up')
 release = Key('shift:up,alt:up,ctrl:up')
 
 cmd.map = {
-    'cancel':    Key('c-g'),
+    'cancel':    Key('escape'),
                                                           
     #### Cursor manpulation
     'up [<n>]':    Key('up:%(n)d'),
@@ -39,7 +39,7 @@ cmd.map = {
     'yope [<n>]':  Key('c-right:%(n)d'),
 
     'home': Key('home'),
-    'end': Key('end'),
+    'doll': Key('end'),
 
     '(file top | doc home)': Key('c-home'),
     '(file toe | doc end)': Key('c-end'),

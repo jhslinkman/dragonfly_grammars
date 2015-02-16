@@ -96,6 +96,11 @@ rules = MappingRule(
         "dot S Q L": Key("dot,s,q,l"),
         "dot (tex | tech)": Key("dot,t,e,x"),
         "dot T X T": Key("dot,t,x,t"),
+
+        "less than": Key("space,langle,space"),
+        "less equals": Text("space,langle,equal,space"),
+        "greater than": Key("space,rangle,space"),
+        "greater equals": Text("space,rangle,equal,space"),
         
         "(pail | (L | left) paren)": Key("lparen"),
         "(pair | (R | right) paren)": Key("rparen"),
