@@ -10,28 +10,34 @@ from dragonfly import (
 )
 
 
-DYN_MODULE_TYPE = "Emacs mode"
-DYN_MODULE_NAME = "org"
+DYN_MODULE_TYPE = "utility"
+DYN_MODULE_NAME = "pivotal tracker"
 INCOMPATIBLE_MODULES = [
     '',
 ]
 
 
-grammar = Grammar('org mode')
+grammar = Grammar('pivotal tracker')
 
 rules = MappingRule(
-    name = 'org mode',
+    name = 'pivotal tracker',
     mapping = {
-        "to do": Key("c-c,c-t"),
-        "sparse tree": Key("c-c,slash"),
-        "show global to do": Key("c-c,a,t"),
-        "insert to do": Key("shift:down,a-enter,shift:up"),
-        "visit link": Key("c-c,c-o"),
-        "insert link": Key("c-c,c-l"),
-        "fold document": Key("s-tab"),
-        "schedule task": Key("c-c,c-s"),
-        "show agenda": Key("c-c,a,a"),
-        "archive": Key("c-c,c-x,c-a")
+        "toggle backlog": Key("s-b"),
+        "toggle [charts | graphs]": Key("s-g"),
+        "toggle done": Key("s-d"),
+        "toggle history": Key("s-h"),
+        "toggle icebox": Key("s-i"),
+        "toggle my work": Key("s-w"),
+        "toggle (labels | searches)": Key("s-l"),
+        "toggle current": Key("s-c"),
+        "toggle notifications": Key("s-n"),
+        "toggle epic": Key("s-e"),
+        "toggle help":  Key("question"),
+        "add story":  Key("a"),
+        "add epic":  Key("e"),
+        "search":  Key("slash"),
+        "save story":  Key("c-s"),
+        "save comment":  Key("s-enter"),
     },    
     extras = [
         Dictation("text", format=False),

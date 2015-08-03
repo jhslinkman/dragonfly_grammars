@@ -47,7 +47,10 @@ cmd.map = {
     '(file toe | doc end)':    Key('a-rangle'),
 
     "(cent | center) line": Key("c-l"),
-    
+
+    "go to line": Key("a-g,g"),
+    "go to line [<n>]": Key("a-g,g") + Text("%(n)d"),
+        
     #### Various keys
     '(space | ace) [<n>]': num_args + Key('space'),
     'comma': Key('comma'),

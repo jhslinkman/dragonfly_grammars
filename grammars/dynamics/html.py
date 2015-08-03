@@ -10,28 +10,28 @@ from dragonfly import (
 )
 
 
-DYN_MODULE_TYPE = "Emacs mode"
-DYN_MODULE_NAME = "org"
+DYN_MODULE_TYPE = "programming"
+DYN_MODULE_NAME = "html"
 INCOMPATIBLE_MODULES = [
     '',
 ]
 
 
-grammar = Grammar('org mode')
+grammar = Grammar('')
 
 rules = MappingRule(
-    name = 'org mode',
+    name = 'html',
     mapping = {
-        "to do": Key("c-c,c-t"),
-        "sparse tree": Key("c-c,slash"),
-        "show global to do": Key("c-c,a,t"),
-        "insert to do": Key("shift:down,a-enter,shift:up"),
-        "visit link": Key("c-c,c-o"),
-        "insert link": Key("c-c,c-l"),
-        "fold document": Key("s-tab"),
-        "schedule task": Key("c-c,c-s"),
-        "show agenda": Key("c-c,a,a"),
-        "archive": Key("c-c,c-x,c-a")
+        "fold": Key("c-c,c-f"),
+        "element close": Key("c-c,slash"),
+        "element child": Key("c-c,c-e,d"),
+        "element parent": Key("c-c,c-e,u"),
+        "element next": Key("c-c,c-e,n"),
+        "element last": Key("c-c,c-e,p"),
+        "element select": Key("c-c,c-e,s"),
+        "element kill": Key("c-c,c-e,k"),
+        "element home": Key("c-c,c-e,d"),
+        "element end": Key("c-c,c-e,e"),
     },    
     extras = [
         Dictation("text", format=False),
