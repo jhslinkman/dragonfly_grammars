@@ -3,7 +3,7 @@ from dragonfly import (
     AppContext,
     MappingRule,
     Key,
-    Text, 
+    Text,
     Dictation,
     Integer,
     Function
@@ -32,6 +32,9 @@ rules = MappingRule(
         "read [dot] table": Key("r,e,a,d,dot,t,a,b,l,e,lparen"),
         "write [dot] csv": Key("w,r,i,t,e,dot,c,s,v,lparen"),
         "read [dot] csv": Key("r,e,a,d,dot,c,s,v,lparen"),
+        "n row": Key("n,r,o,w,lparen"),
+        "n col": Key("n,c,o,l,lparen"),
+        "chain": Key("space,percent,rangle,percent,space"),
 
         # R modules
         "R MySQL": Key("s-r,s-m,y,s-s,s-q,s-l"),
@@ -48,18 +51,21 @@ rules = MappingRule(
         "to PDF": Key("a-n,s-p"),
         "knit": Key("a-n,r"),
         "tangle": Key("a-n,s-t"),
-                
+		# Rmarkdown
+		"generate html preview": Key("a-x,e,s,s,hyphen,r,m,a,r,k,d,o,w,n,enter"),
+		"generate PDF preview": Key("a-colon,lparen,e,s,s,hyphen,r,m,a,r,k,d,o,w,n,space,t,rparen,enter"),
+
         # workarounds for Windows/Emacs specific issues
         "turn off graphics": Key("o,p,t,i,o,n,s,lparen,dquote,m,e,n,u,dot,g,r,a,p,h,i,c,s,dquote,equal,s-f,s-a,s-l,s-s,s-e,rparen"),
-                
-    },    
+
+    },
     extras = [
         Dictation("text", format=False),
         Integer("n", 1, 20000),
     ],
 
     defaults = {
-        "text" : "", 
+        "text" : "",
         "n" : 1,
     }
 )

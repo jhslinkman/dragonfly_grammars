@@ -10,8 +10,8 @@ from dragonfly import (
 )
 
 
-DYN_MODULE_TYPE = "utilities"
-DYN_MODULE_NAME = "bash"
+DYN_MODULE_TYPE = "programming"
+DYN_MODULE_NAME = "git"
 INCOMPATIBLE_MODULES = [
     '',
 ]
@@ -19,28 +19,19 @@ INCOMPATIBLE_MODULES = [
 
 grammar = Grammar('')
 
+git = Key("g,i,t,space")
+
 rules = MappingRule(
     name = '',
     mapping = {
-        "(change (directory|dir)|C D)": Key("c,d,space"),
-        "push directory": Key("p,u,s,h,d"),
-        "pop directory": Key("p,o,p,d"),
-        "list files": Key("l,s,space,hyphen,l,a,enter"),
-        "make (directory|dir)": Key("m,k,d,i,r,space"),
-        "move": Key("m,v,space"),
-        "(R M|remove file)": Key("r,m,space"),
-        "(R M D|remove directory)": Key("r,m,space,hyphen,r"),
-        "W get ": Key("w,g,e,t,space"),
-        "slash user": Key("slash,u,s,r"),
-        "slash opt": Key("slash,o,p,t"),
-        "slash et cetera": Key("slash,e,t,c"),
-        "slash win root": Key("slash,c,y,g,d,r,i,v,e,slash,c"),
-        "vim": Key("v,i,m,space"),
-        "kill process": Key("c-c"),
-        "diff": Key("d,i,f,f,space"),
-
-        # remote server commands
-        "S S H": Key("f,a,k,e,c,y,g,p,t,y,space,s,s,h"),
+        "git pull [<text>]": git + Key("p,u,l,l,space") + Text("%(text)s"),
+        "git fetch [<text>]": git + Key("f,e,t,c,h,space") + Text("%(text)s"),
+        "git push [<text>]": git + Key("p,u,s,h,space") + Text("%(text)s"),
+        "git clone [<text>]": git + Key("c,l,o,n,e,space") + Text("%(text)s"),
+        "git status": git + Key("s,t,a,t,u,s,space") + Text("%(text)s"),
+        "git branch": git + Key("b,r,a,n,c,h,space") + Text("%(text)s"),
+        "git commit all": git + Key("c,o,m,m,i,t,space,hyphen,a,space,hyphen,m,space") + Text("%(text)s"),
+        "git commit": git + Key("c,o,m,m,i,t,space,hyphen,m,space") + Text("%(text)s"),
     },    
     extras = [
         Dictation("text", format=False),

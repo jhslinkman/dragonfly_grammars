@@ -29,12 +29,12 @@ rules = MappingRule(
 
         # Code evaluation
         'eval (fun | function)':  Key('a-x'),
-        'eval expression':  Key('a-colon'),
+		'eval expression':  Key('a-colon'),
         'eval last [sexp]':  Key('c-x,c-e'),
         'eval defun':  Key('ctrl:down,alt:down,x,alt:up,ctrl:up'),
         'eval region': Key('a-x,e,v,a,l,hyphen,r,e,g,i,o,n,enter'),
         'eval buffer': Key('a-x,e,v,a,l,hyphen,b,u,f,f,e,r,enter'),
-                
+
         # Search and replace
         '( (fore | forward) search | (S | search) next ) [<n>]':
             Key('c-s:%(n)d'),
@@ -59,7 +59,7 @@ rules = MappingRule(
         # Working with files and buffers
         'visit file': Key('c-x, c-f'),
         'file save':  Key('c-x, c-s'),
-        'file save as':  Key('c-x, c-w'),        
+        'file save as':  Key('c-x, c-w'),
         'new window':  Key('c-x, 3'),
         'new window down':  Key('c-x, 2'),
         'previous window':  Key('c-minus, c-x, o'),
@@ -70,17 +70,21 @@ rules = MappingRule(
         'enlarge window horizontally [<n>]': num_args + Key('c-x,rbrace'),
         'shrink window [<n>]': Key('c-minus') + num_args + Key('c-x,caret'),
         'enlarge window [<n>]': num_args + Key('c-x,caret'),
+        "switch to scratch": Key("a-x,s,w,i,t,c,h,hyphen,t,o,hyphen,b,u,f,f,e,r,enter/50") + Key("asterisk,s,c,r,a,t,c,h,asterisk"),
 
         'next buffer': Key('c-x,right'),
         'previous buffer': Key('c-x,right'),
         'buffer menu': Key('a-x,b,u,f,f,e,r,hyphen,m,e,n,u,enter'),
         'kill buffer': Key('c-x, k, enter'),
 
+        # Open HTML preview of current buffer (requires html-preview function)
+        "html preview": Key("a-x,h,t,m,l,hyphen,p,r,e,v,i,e,w,enter"),
+
         # Working with Emacs itself
         'suspend Emacs': Key('c-z'),
         'minimize Emacs': Key('c-z'),
-        'kill Emacs kill': Key('c-x, c-c'),
-        
+        'close Emacs close': Key('c-x, c-c'),
+
         # Shell specific commands
         'open shell': Key('a-x,s,h,e,l,l,enter'),
         'open cygwin shell': Key('a-x,c,y,g,w,i,n,hyphen,s,h,e,l,l,enter'),
@@ -120,7 +124,7 @@ rules = MappingRule(
         '( dire | dired ) make (dir | directory)': Key('plus'),
         '( dire | dired ) shell': Key('exclamation'),
         '( dire | dired ) async shell': Key('ampersand'),
-        
+
         # Some python specific commands, move these to another file
         'ipython shell': Key('a-x') + Text('ipython') + Key('enter'),
     },
@@ -133,7 +137,7 @@ rules = MappingRule(
     ],
 
     defaults = {
-        "text" : "", 
+        "text" : "",
         "mark": "a",
         "n" : 1,
         "scroll_by" : 10

@@ -25,7 +25,7 @@ release = Key('shift:up,alt:up,ctrl:up')
 
 cmd.map = {
     'cancel':    Key('c-g'),
-                                                          
+
     #### Cursor manpulation
     'up [<n>]':    Key('up:%(n)d'),
     'down [<n>]':  Key('down:%(n)d'),
@@ -50,14 +50,14 @@ cmd.map = {
 
     "go to line": Key("a-g,g"),
     "go to line [<n>]": Key("a-g,g") + Text("%(n)d"),
-        
+
     #### Various keys
     '(space | ace) [<n>]': num_args + Key('space'),
     'comma': Key('comma'),
     'act': Key('escape'),
-    '(delete | del | chuck) [<n>]': num_args + Key('del'),
+    '(delete | chuck) [<n>]': num_args + Key('del'),
     '(backspace | scratch) [<n>]': Key('backspace:%(n)d'),
-    '(enter | slap) [<n>]': Key('enter:%(n)d'),
+    'slap [<n>]': Key('enter:%(n)d'),
     'tab [<n>]': Key('tab:%(n)d'),
 
     ####
@@ -69,7 +69,7 @@ cmd.map = {
     "paste [that]": release + Key("c-y"),
     "paste over": Key("backspace, c-y"),
     "paste below": release + Key("end, enter, c-y"),
-    "paste again": release + Key("a-y"),
+    "paste again [<n>]": release + Key("a-y:%(n)d"),
     "duplicate <n>": release + Key("a-w, c-y:%(n)d"),
     "duplicate line [<n>] [times]":
         release + Key("c-a, c-space, c-n, a-w, c-y:%(n)d,left"),
@@ -87,7 +87,7 @@ cmd.map = {
     "insert below": Key("end,c-j"),
     "insert above": Key("up,end,c-j"),
     "insert (par | paragraph)": Key("end,enter,c-x,c-o,enter:2,up"),
-    
+
     "( (back | left) <n> (word | words) | bow [<n>] )":
         num_args + Key("a-b"),
     "( (forward |fore | right) <n> (word | words) | fow [<n>] )":
@@ -97,7 +97,7 @@ cmd.map = {
     "((kill | del | delete) (prev |previous |back) [<n>] (word | words) | whack [<n>])":
 	    release + num_args + Key("a-backspace"),
     "yank word": Key("a-x,t,h,i,n,g,hyphen,c,o,p,y,hyphen,w,o,r,d,enter"),
-        
+
     "(kill | del | delete) [this] line":
 	    release + Key("c-k"),
     "(kill | del | delete) whole line":
@@ -109,7 +109,7 @@ cmd.map = {
     "(kill | del | delete) (back | prev | previous) [<n>] (line | lines)":
 	    release + Key("a-minus") + num_args + Key("c-k"),
     "yank line": Key("a-x,t,h,i,n,g,hyphen,c,o,p,y,hyphen,l,i,n,e,enter"),
-        
+
     "(up | back) [<n>] (par | paragraph | paragraphs)":
         num_args + Key("a-lbrace"),
     "(down | next) [<n>] (par | paragraph | paragraphs)":
@@ -117,14 +117,14 @@ cmd.map = {
     "mark [<n>] (par | paragraph | paragraphs)":
         num_args + Key("a-h"),
 
-    "(for list | lore) [<n>]": num_args + Key("ctrl:down,a-n,ctrl:up"),
-    "(back list | lack) [<n>]": num_args + Key("ctrl:down,a-p,ctrl:up"),
+    "(for list) [<n>]": num_args + Key("ctrl:down,a-n,ctrl:up"),
+    "(back list) [<n>]": num_args + Key("ctrl:down,a-p,ctrl:up"),
     "fore ex [<n>]": num_args + Key("ctrl:down,a-f,ctrl:up"),
     "back ex [<n>]": num_args + Key("ctrl:down,a-b,ctrl:up"),
     "kill ex [<n>]": num_args + Key("ctrl:down,a-k,ctrl:up"),
     "kill back ex [<n>]": Key("a-minus") + num_args + Key("ctrl:down,a-k,ctrl:up"),
     "mark ex": Key("ctrl:down,a-space,ctrl:up"),
-                
+
     #### Indentation
     '(home | first) (car | character)':
         Key('a-m'),
@@ -235,4 +235,3 @@ def format_studley(dictation):
     text = str(dictation)
     words = text.split(" ")
     return words[0] + "".join(w.capitalize() for w in words[1:])
-

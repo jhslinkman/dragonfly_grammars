@@ -54,7 +54,7 @@ mapping = {
     "presentation mode": Key("ctrl:down,alt:down,p,alt:up,ctrl:up"),
     "go to page": Key("ctrl:down,alt:down,g,alt:up,ctrl:up"),
 }
-    
+
 cs = lambda k: Key("ctrl:down,shift:down") + k + Key("ctrl:up,shift:up")
 
 mapping.update({
@@ -106,9 +106,9 @@ mapping.update({
     # DOM panel
     "next object": Key("c-dot"),
     "(prev | previous) object ": Key("c-comma"),
-        
+
     })
-        
+
 rules = MappingRule(
     name = 'firefox',
     mapping = mapping,
@@ -119,7 +119,7 @@ rules = MappingRule(
     ],
 
     defaults = {
-        "text" : "", 
+        "text" : "",
         "n" : 1,
     }
 )

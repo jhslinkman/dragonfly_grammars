@@ -7,23 +7,28 @@ from dragonfly import (Grammar,
                        Dictation,
                        Integer,
                        Key,
-                       Playback,
-                       Pause,
                        Function)
-    
+
+release = Mouse("left:up")
+
 rules = MappingRule(
   name = "general",
   mapping = {
-    '(escape | scape) <text>' : Text('%(text)s'),
-    "slap": Key("enter"),
-    "max (win | window)": Key("w-up"),
-    "left (win | window) [<n>]": Key("w-left:%(n)d"),
-    "right (win | window) [<n>]": Key("w-right:%(n)d"),
-    "min (win | window)": Key("w-down"),
-    "switch apps": Key("alt:down, tab"),
-    "switch (window | win)": Mimic("press", "alt", "tab"), #  Key("alt:down/10,tab,alt:up"),
-    "code mode": Mimic("\\no-caps-on") + Mimic("\\no-space-on"),
-    "snore": Key("f9") + Pause("50") + Mimic("go", "to", "sleep"),
+    "pause": Key("f9"),
+    "precise": Key("f8"),
+    "click": Mouse("left"),
+    "control click": Key("ctrl:down") + Mouse("left") + Key("ctrl:up"),
+    "control dub click": Key("ctrl:down") + Mouse("left:2") + Key("ctrl:up"),
+    "shift click": Key("shift:down") + Mouse("left") + Key("shift:up"),
+    "shift dub click": Key("shift:down") + Mouse("left:2") + Key("shift:up"),
+    "drag start": Mouse("left:down"),
+    "drag stop": release,
+    "dub click": Mouse("left:2"),
+    "right click": Mouse("right"),
+    "dub right click": Mouse("right:2"),
+    "mouse release": release,
+    "scroll start": Key("f11:down"),
+    "scroll stop": Key("f11:up"),
   },    
     extras = [
       Dictation("text", format=False),
